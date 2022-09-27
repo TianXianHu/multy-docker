@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t positive_thinking/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t fancystacy/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true positive_thinking/react-test npm test
+  - docker run -e CI=true fancystacy/react-test npm test
 
 after_success:
-  - docker build -t positive_thinking/multi-client ./client
-  - docker build -t positive_thinking/multi-nginx ./nginx
-  - docker build -t positive_thinking/multi-server ./server
-  - docker build -t positive_thinking/multi-worker ./worker
+  - docker build -t fancystacy/multi-client ./client
+  - docker build -t fancystacy/multi-nginx ./nginx
+  - docker build -t fancystacy/multi-server ./server
+  - docker build -t fancystacy/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push positive_thinking/multi-client
-  - docker push positive_thinking/multi-nginx
-  - docker push positive_thinking/multi-server
-  - docker push positive_thinking/multi-worker
+  - docker push fancystacy/multi-client
+  - docker push fancystacy/multi-nginx
+  - docker push fancystacy/multi-server
+  - docker push fancystacy/multi-worker
